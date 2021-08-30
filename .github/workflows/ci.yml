@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint pylint-quotes mypy pydcodestyle
+        pip install pylint pylint-quotes mypy pycodestyle
     - name: Analysing the code with pylint
       run: |
         pycodestyle osm_painter
