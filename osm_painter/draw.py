@@ -1,16 +1,13 @@
-from typing import List
-
 from descartes import PolygonPatch
 from joblib import Parallel, delayed
 import matplotlib.pyplot as plt
 
-from .model.drawable import Area
 from .model.layer import Layer
 from .model.location import Location
 from .model.style import StyleDict, Style
 
 
-def draw(ax: plt.Axes, location: Location, layers: List[Layer], style: StyleDict, perimeter_style: Style,
+def draw(ax: plt.Axes, location: Location, layers: list[Layer], style: StyleDict, perimeter_style: Style,
          background_style: Style) -> None:
     ax.axis('off')
     ax.axis('equal')

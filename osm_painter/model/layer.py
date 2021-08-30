@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import Optional
 
 from matplotlib import pyplot as plt
 from shapely.geometry.base import BaseGeometry
@@ -14,7 +14,7 @@ class Layer:
     name: str
     _query: Query
 
-    _result: List[Drawable]
+    _result: list[Drawable]
 
     def __init__(self, name: str, query: Query):
         self.name = name
@@ -32,9 +32,10 @@ class Layer:
                     drawable.draw(ax, style['default'], perimeter)
 
 
-building_layer = Layer('building', AreaQuery('["building"]'))
-highway_layer = Layer('highway', WayQuery('["highway"]'))
-landuse_layer = Layer('landuse', AreaQuery('["landuse"]'))
-leisure_layer = Layer('leisure', AreaQuery('["leisure"]'))
-water_layer = Layer('water', AreaQuery('["water"]'))
-waterway_layer = Layer('waterway', WayQuery('["waterway"]'))
+class Layers:
+    building_layer = Layer('building', AreaQuery('["building"]'))
+    highway_layer = Layer('highway', WayQuery('["highway"]'))
+    landuse_layer = Layer('landuse', AreaQuery('["landuse"]'))
+    leisure_layer = Layer('leisure', AreaQuery('["leisure"]'))
+    water_layer = Layer('water', AreaQuery('["water"]'))
+    waterway_layer = Layer('waterway', WayQuery('["waterway"]'))

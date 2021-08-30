@@ -1,4 +1,4 @@
-from typing import Protocol, Dict, Optional
+from typing import Protocol, Optional
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -12,7 +12,7 @@ _transformer = pyproj.Transformer.from_crs(4326, 3857)
 
 
 class Drawable(Protocol):
-    tags: Dict[str, str]
+    tags: dict[str, str]
 
     def draw(self, ax: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
         ...

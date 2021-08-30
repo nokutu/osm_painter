@@ -1,4 +1,4 @@
-from typing import TypedDict, Dict, Tuple, Union
+from typing import TypedDict, Tuple, Union
 
 Color = Union[Tuple[float, float, float], str]
 
@@ -12,5 +12,5 @@ class Style(TypedDict, total=False):
     hatch: str
 
 
-LayerStyle = Dict[str, Style]
-StyleDict = Dict[str, LayerStyle]
+LayerStyle = dict[str, Style]
+StyleDict = dict[str, LayerStyle]

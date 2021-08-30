@@ -1,4 +1,4 @@
-from typing import Protocol, List
+from typing import Protocol
 
 import overpy
 
@@ -14,7 +14,7 @@ _api.query = _memory.cache(_api.query)
 
 
 class Query(Protocol):
-    def query(self, location: Location) -> List[Drawable]:
+    def query(self, location: Location) -> list[Drawable]:
         ...
 
 
@@ -24,7 +24,7 @@ class WayQuery(Query):
     def __init__(self, query_filter: str):
         self._query_filter = query_filter
 
-    def query(self, location: Location) -> List[Drawable]:
+    def query(self, location: Location) -> list[Drawable]:
         result = _api.query(f'way({location.to_overpass()}){self._query_filter};'
                             f'(._;>;);'
                             f'out body;')
@@ -37,7 +37,7 @@ class AreaQuery(Query):
     def __init__(self, query_filter: str):
         self._query_filter = query_filter
 
-    def query(self, location: Location) -> List[Drawable]:
+    def query(self, location: Location) -> list[Drawable]:
         result = _api.query(f'way({location.to_overpass()}){self._query_filter};'
                             f'(._;>;);'
                             f'out body;')

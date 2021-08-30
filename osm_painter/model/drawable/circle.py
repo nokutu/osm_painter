@@ -1,4 +1,4 @@
-from typing import overload, Tuple, Optional
+from typing import Tuple, Optional
 
 import numpy as np
 import overpy
@@ -20,7 +20,7 @@ class Circle(Drawable):
         lon = np.array([center[1]], dtype=np.float32)
         self._center = self.transform_coords(lat, lon)[0]
         self._radius = radius
-        self.tags = {}
+        self.tags: dict[str, str] = {}
 
     def draw(self, ax: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
         width = 1.
