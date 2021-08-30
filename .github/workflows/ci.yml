@@ -20,5 +20,5 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pycodestyle osm_painter
-        pylint -load-plugins pylint_quotes osm_painter
+        pylint --load-plugins pylint_quotes osm_painter
         mypy osm_painter
