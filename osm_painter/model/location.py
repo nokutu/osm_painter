@@ -5,8 +5,7 @@ import numpy as np
 from shapely.geometry import Point, Polygon
 from shapely.geometry.base import BaseGeometry
 
-from .drawable import Circle, Drawable
-from .drawable.edge import Edge
+from .drawable import Drawable, Edge
 
 
 class Location(Protocol):

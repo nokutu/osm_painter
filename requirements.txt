@@ -5,3 +5,7 @@ joblib~=1.0.1
 descartes~=1.1.0
 pyproj~=3.1.0
 numpy~=1.21.2
+pylint~=2.10.2
+pylint-quotes~=0.2.3
+mypy~=0.910
+pycodestyle~=2.7.0

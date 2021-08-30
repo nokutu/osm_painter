@@ -1,14 +1,13 @@
 from typing import Tuple, Optional
 
-import numpy as np
-import overpy
 from descartes import PolygonPatch
 import matplotlib.pyplot as plt
+import numpy as np
 from shapely.geometry import Point
 from shapely.geometry.base import BaseGeometry
 
 from .drawable import Drawable
-from osm_painter.model.style import Style
+from ..style import Style
 
 
 class Circle(Drawable):
@@ -16,13 +15,14 @@ class Circle(Drawable):
     _center: np.ndarray
 
     def __init__(self, center: Tuple[float, float], radius: float):
+        super().__init__()
         lat = np.array([center[0]], dtype=np.float32)
         lon = np.array([center[1]], dtype=np.float32)
         self._center = self.transform_coords(lat, lon)[0]
         self._radius = radius
         self.tags: dict[str, str] = {}
 
-    def draw(self, ax: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
+    def draw(self, axes: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
         width = 1.
         if 'lw' in style:
             width = style['lw']
@@ -33,4 +33,4 @@ class Circle(Drawable):
         geom = outer - inner
         if perimeter:
             geom = perimeter.area.intersection(geom)
-        ax.add_patch(PolygonPatch(geom, **style))
+        axes.add_patch(PolygonPatch(geom, **style))

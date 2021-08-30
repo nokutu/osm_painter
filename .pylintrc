@@ -1,0 +1,25 @@
+[MASTER]
+
+disable=missing-class-docstring,
+        missing-function-docstring,
+        missing-module-docstring,
+        duplicate-code,
+        too-few-public-methods
+
+[FORMAT]
+
+max-line-length=120
+
+[BASIC]
+
+good-names=
+    i,
+    j,
+    e,
+    logger,
+
+[DESIGN]
+
+max-args=10
+max-locals=20
+

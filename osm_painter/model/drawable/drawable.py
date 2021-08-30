@@ -1,12 +1,11 @@
 from typing import Protocol, Optional
 
+import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import pyplot as plt
+import pyproj
 from shapely.geometry.base import BaseGeometry
 
-from osm_painter.model.style import Style
-
-import pyproj
+from ..style import Style
 
 _transformer = pyproj.Transformer.from_crs(4326, 3857)
 
@@ -14,7 +13,7 @@ _transformer = pyproj.Transformer.from_crs(4326, 3857)
 class Drawable(Protocol):
     tags: dict[str, str]
 
-    def draw(self, ax: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
+    def draw(self, axes: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
         ...
 
     @staticmethod

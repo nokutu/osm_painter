@@ -1,9 +1,8 @@
 from typing import Optional
 
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 from shapely.geometry.base import BaseGeometry
 
-from . import Style
 from .drawable import Drawable
 from .location import Location
 from .query import Query, WayQuery, AreaQuery
@@ -23,13 +22,13 @@ class Layer:
     def query(self, location: Location) -> None:
         self._result = self._query.query(location)
 
-    def draw(self, ax: plt.Axes, style: LayerStyle, perimeter: Optional[BaseGeometry]) -> None:
+    def draw(self, axes: plt.Axes, style: LayerStyle, perimeter: Optional[BaseGeometry]) -> None:
         for drawable in self._result:
             if self.name in drawable.tags:
                 if drawable.tags[self.name] in style:
-                    drawable.draw(ax, style[drawable.tags[self.name]], perimeter)
+                    drawable.draw(axes, style[drawable.tags[self.name]], perimeter)
                 elif 'default' in style:
-                    drawable.draw(ax, style['default'], perimeter)
+                    drawable.draw(axes, style['default'], perimeter)
 
 
 class Layers:
