@@ -18,5 +18,5 @@ class Drawable(Protocol):
         ...
 
     @staticmethod
-    def transform_coords(lat: np.ndarray, lon: np.ndarray):
+    def transform_coords(lat: np.ndarray, lon: np.ndarray) -> np.ndarray:
         return np.vstack(_transformer.transform(lat, lon)).transpose()

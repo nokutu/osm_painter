@@ -16,7 +16,7 @@ class Edge(Drawable):
 
     def __init__(self, geometry: BaseGeometry):
         self._geometry = geometry
-        self.tags = {}
+        self.tags: dict[str, str] = {}
 
     def draw(self, ax: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
         width = 1.
