@@ -1,3 +1,2 @@
 from .draw import draw
-from .model.layer import Layers
-from .model.location import RadiusLocation, BoxLocation
+from .model import BoxLocation, ElevationLayer, Layers, RadiusLocation

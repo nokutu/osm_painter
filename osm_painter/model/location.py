@@ -5,8 +5,8 @@ import numpy as np
 from shapely.geometry import Point, Polygon
 from shapely.geometry.base import BaseGeometry
 
+from osm_painter.utils.coords_utils import transform_coords, transform_coords_inv
 from .drawable import Drawable, Edge
-from ..utils.coords_utils import transform_coords, transform_coords_inv
 
 
 class Location(Protocol):

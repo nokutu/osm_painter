@@ -1,55 +1,20 @@
 import itertools
-from typing import List, Optional, Protocol, Tuple
+from typing import Optional, List, Tuple
 
-import matplotlib.pyplot as plt
 import numpy as np
-from numpy.typing import NDArray
 from descartes import PolygonPatch
-from matplotlib import cm
-from matplotlib.colors import Colormap, Normalize
+from matplotlib import pyplot as plt, cm
+from matplotlib.colors import Normalize, Colormap
 from matplotlib.contour import QuadContourSet
+from numpy.typing import NDArray
 from shapely.geometry import LineString
 from shapely.geometry.base import BaseGeometry
 
-from .drawable import Drawable
-from .location import Location
-from .query import Query, WayQuery, AreaQuery
-from .style import LayerStyle
-from ..utils.coords_utils import transform_coords
-from ..utils.opentopodata import query_topo
-
-
-class Layer(Protocol):
-    name: str
-
-    def query(self, location: Location) -> None:
-        ...
-
-    def draw(self, axes: plt.Axes, layer_style: LayerStyle, perimeter: Optional[BaseGeometry]) -> None:
-        ...
-
-
-class QueryLayer(Layer):
-    name: str
-    _query: Query
-
-    _result: List[Drawable]
-
-    def __init__(self, name: str, query: Query):
-        super().__init__()
-        self.name = name
-        self._query = query
-
-    def query(self, location: Location) -> None:
-        self._result = self._query.query(location)
-
-    def draw(self, axes: plt.Axes, layer_style: LayerStyle, perimeter: Optional[BaseGeometry]) -> None:
-        for drawable in self._result:
-            if self.name in drawable.tags:
-                if drawable.tags[self.name] in layer_style:
-                    drawable.draw(axes, layer_style[drawable.tags[self.name]], perimeter)
-                elif 'default' in layer_style:
-                    drawable.draw(axes, layer_style['default'], perimeter)
+from osm_painter.model.location import Location
+from osm_painter.model.style import LayerStyle
+from osm_painter.utils.coords_utils import transform_coords
+from osm_painter.utils.opentopodata import query_topo
+from .layer import Layer
 
 
 class ElevationLayer(Layer):
@@ -136,13 +101,3 @@ class ElevationLayer(Layer):
         if self._legend and isinstance(style['color'], Colormap):
             plt.colorbar(cm.ScalarMappable(norm=Normalize(self._min_max_elevation[0], self._min_max_elevation[1]),
                                            cmap=style['color']), ax=axes, shrink=0.5)
-
-
-class Layers:
-    building_layer = QueryLayer('building', AreaQuery('["building"]'))
-    highway_layer = QueryLayer('highway', WayQuery('["highway"]'))
-    elevation_layer = ElevationLayer('elevation')
-    landuse_layer = QueryLayer('landuse', AreaQuery('["landuse"]'))
-    leisure_layer = QueryLayer('leisure', AreaQuery('["leisure"]'))
-    water_layer = QueryLayer('water', AreaQuery('["water"]'))
-    waterway_layer = QueryLayer('waterway', WayQuery('["waterway"]'))

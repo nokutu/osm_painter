@@ -28,4 +28,4 @@ class _QueryTopo:
         return cast(Callable[[List[Tuple[float, float]]], List[float]], impl)
 
 
-query_topo = _QueryTopo()()
+query_topo: Callable[[List[Tuple[float, float]]], List[float]] = _QueryTopo()()
