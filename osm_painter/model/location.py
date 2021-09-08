@@ -6,6 +6,7 @@ from shapely.geometry import Point, Polygon
 from shapely.geometry.base import BaseGeometry
 
 from .drawable import Drawable, Edge
+from ..utils.coords_utils import transform_coords, transform_coords_inv
 
 
 class Location(Protocol):
@@ -16,6 +17,9 @@ class Location(Protocol):
         ...
 
     def get_surface(self) -> BaseGeometry:
+        ...
+
+    def get_bounds(self) -> Tuple[float, float, float, float]:
         ...
 
 
@@ -36,8 +40,15 @@ class RadiusLocation:
     def get_surface(self) -> BaseGeometry:
         lat = np.array([self._coords[0]], dtype=np.float32)
         lon = np.array([self._coords[1]], dtype=np.float32)
-        center = Drawable.transform_coords(lat, lon)[0]
+        center = transform_coords(lat, lon)[0]
         return Point(center).buffer(self._radius)
+
+    def get_bounds(self) -> Tuple[float, float, float, float]:
+        center = transform_coords(self._coords[0], self._coords[1])
+        lats = np.array([center[0] - self._radius, center[0] + self._radius], dtype=np.float32)
+        lons = np.array([center[1] - self._radius, center[1] + self._radius], dtype=np.float32)
+        bounds = transform_coords_inv(lats, lons)
+        return bounds[0, 1], bounds[0, 0], bounds[1, 1], bounds[1, 0]
 
 
 class BoxLocation:
@@ -62,7 +73,7 @@ class BoxLocation:
     def get_surface(self) -> BaseGeometry:
         lat = np.array([self._coords[0]], dtype=np.float32)
         lon = np.array([self._coords[1]], dtype=np.float32)
-        center = Drawable.transform_coords(lat, lon)[0]
+        center = transform_coords(lat, lon)[0]
 
         width = self._width - self._corner_radius * 2
         height = self._height - self._corner_radius * 2

@@ -1,4 +1,6 @@
-from typing import TypedDict, Tuple, Union
+from typing import Dict, TypedDict, Tuple, Union
+
+from matplotlib.colors import Colormap
 
 Color = Union[Tuple[float, float, float], str]
 
@@ -7,10 +9,10 @@ class Style(TypedDict, total=False):
     lw: float
     ec: Color
     fc: Color
-    color: Color
+    color: Union[Color, Colormap]
     zorder: int
     hatch: str
 
 
-LayerStyle = dict[str, Style]
-StyleDict = dict[str, LayerStyle]
+LayerStyle = Dict[str, Style]
+StyleDict = Dict[str, LayerStyle]

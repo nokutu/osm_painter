@@ -31,6 +31,9 @@ style = {
     },
     'leisure': {
         'park': {'color': '#80FF72', 'lw': 0, 'zorder': -2}
+    },
+    'elevation': {
+        'default': {'color': plt.get_cmap('viridis'), 'lw': 2, 'zorder': -3}
     }
 }
 
@@ -47,12 +50,13 @@ background_style = {
     'hatch': 'ooo...'
 }
 
-draw(ax, BoxLocation((38.54200, -1.95335), 2000, 2000, 100), [
+draw(ax, RadiusLocation((38.54200, -1.95335), 1000), [
     Layers.highway_layer,
     Layers.building_layer,
     Layers.landuse_layer,
     Layers.waterway_layer,
     Layers.leisure_layer,
+    Layers.elevation_layer,
     Layers.water_layer], style, perimeter_style, background_style)
 
 plt.savefig("out.svg")

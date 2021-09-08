@@ -9,6 +9,7 @@ from shapely.geometry.base import BaseGeometry
 
 from .drawable import Drawable
 from ..style import Style
+from ...utils.coords_utils import transform_coords
 
 
 class Area(Drawable):
@@ -18,7 +19,7 @@ class Area(Drawable):
         super().__init__()
         lat = np.array([node.lat for node in way.nodes], dtype=np.float32)
         lon = np.array([node.lon for node in way.nodes], dtype=np.float32)
-        self._polygon = Polygon(self.transform_coords(lat, lon))
+        self._polygon = Polygon(transform_coords(lat, lon))
         self.tags = way.tags
 
     def draw(self, axes: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:

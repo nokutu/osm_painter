@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Dict, Optional
 
 from descartes import PolygonPatch
 import matplotlib.pyplot as plt
@@ -14,7 +14,7 @@ class Edge(Drawable):
     def __init__(self, geometry: BaseGeometry):
         super().__init__()
         self._geometry = geometry
-        self.tags: dict[str, str] = {}
+        self.tags: Dict[str, str] = {}
 
     def draw(self, axes: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
         width = 1.

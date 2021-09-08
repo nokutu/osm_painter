@@ -4,7 +4,10 @@ disable=missing-class-docstring,
         missing-function-docstring,
         missing-module-docstring,
         duplicate-code,
-        too-few-public-methods
+        too-few-public-methods,
+        too-many-arguments,
+        too-many-instance-attributes,
+        too-many-locals,
 
 [FORMAT]
 
@@ -17,9 +20,3 @@ good-names=
     j,
     e,
     logger,
-
-[DESIGN]
-
-max-args=10
-max-locals=20
-

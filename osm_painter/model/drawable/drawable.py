@@ -1,21 +1,14 @@
-from typing import Protocol, Optional
+from typing import Dict, Optional, Protocol
 
 import matplotlib.pyplot as plt
-import numpy as np
-import pyproj
+
 from shapely.geometry.base import BaseGeometry
 
 from ..style import Style
 
-_transformer = pyproj.Transformer.from_crs(4326, 3857)
-
 
 class Drawable(Protocol):
-    tags: dict[str, str]
+    tags: Dict[str, str]
 
     def draw(self, axes: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
         ...
-
-    @staticmethod
-    def transform_coords(lat: np.ndarray, lon: np.ndarray) -> np.ndarray:
-        return np.vstack(_transformer.transform(lat, lon)).transpose()

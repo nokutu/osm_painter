@@ -1,4 +1,4 @@
-from typing import Tuple, Optional
+from typing import Dict, Optional, Tuple
 
 from descartes import PolygonPatch
 import matplotlib.pyplot as plt
@@ -8,6 +8,7 @@ from shapely.geometry.base import BaseGeometry
 
 from .drawable import Drawable
 from ..style import Style
+from ...utils.coords_utils import transform_coords
 
 
 class Circle(Drawable):
@@ -18,9 +19,9 @@ class Circle(Drawable):
         super().__init__()
         lat = np.array([center[0]], dtype=np.float32)
         lon = np.array([center[1]], dtype=np.float32)
-        self._center = self.transform_coords(lat, lon)[0]
+        self._center = transform_coords(lat, lon)[0]
         self._radius = radius
-        self.tags: dict[str, str] = {}
+        self.tags: Dict[str, str] = {}
 
     def draw(self, axes: plt.Axes, style: Style, perimeter: Optional[BaseGeometry]) -> None:
         width = 1.

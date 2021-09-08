@@ -1,19 +1,18 @@
-from typing import Protocol
+from typing import List, Protocol
 
-from joblib import Memory
 import overpy
 
 from .drawable import Area, Drawable, Way
 from .location import Location
+from ..utils.joblib import memory
 
-_memory = Memory('./cachedir', verbose=0)
 
 _api = overpy.Overpass(url='https://overpass.openstreetmap.fr/api/interpreter')
-_api.query = _memory.cache(_api.query)
+_api.query = memory.cache(_api.query)
 
 
 class Query(Protocol):
-    def query(self, location: Location) -> list[Drawable]:
+    def query(self, location: Location) -> List[Drawable]:
         ...
 
 
@@ -24,7 +23,7 @@ class WayQuery(Query):
         super().__init__()
         self._query_filter = query_filter
 
-    def query(self, location: Location) -> list[Drawable]:
+    def query(self, location: Location) -> List[Drawable]:
         result = _api.query(f'way({location.to_overpass()}){self._query_filter};'
                             f'(._;>;);'
                             f'out body;')
@@ -38,7 +37,7 @@ class AreaQuery(Query):
         super().__init__()
         self._query_filter = query_filter
 
-    def query(self, location: Location) -> list[Drawable]:
+    def query(self, location: Location) -> List[Drawable]:
         result = _api.query(f'way({location.to_overpass()}){self._query_filter};'
                             f'(._;>;);'
                             f'out body;')
