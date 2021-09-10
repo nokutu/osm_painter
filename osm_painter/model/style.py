@@ -2,14 +2,14 @@ from typing import Dict, TypedDict, Tuple, Union
 
 from matplotlib.colors import Colormap
 
-Color = Union[Tuple[float, float, float], str]
+_color = Union[Tuple[float, float, float], str]
 
 
 class Style(TypedDict, total=False):
     lw: float
-    ec: Color
-    fc: Color
-    color: Union[Color, Colormap]
+    ec: _color
+    fc: _color
+    color: Union[_color, Colormap]
     zorder: int
     hatch: str
 

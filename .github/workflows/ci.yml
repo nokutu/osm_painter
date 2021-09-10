@@ -19,6 +19,6 @@ jobs:
         pip install -r requirements.txt
     - name: Static analysis
       run: |
-        pycodestyle osm_painter
-        pylint --load-plugins pylint_quotes osm_painter
-        mypy osm_painter
+        pycodestyle osm_painter ./example.py
+        pylint --load-plugins pylint_quotes osm_painter ./example.py
+        mypy osm_painter ./example.py

@@ -1,5 +1,4 @@
-from typing import Protocol
-from typing import Optional
+from typing import Optional, Protocol
 
 from matplotlib import pyplot as plt
 from shapely.geometry.base import BaseGeometry

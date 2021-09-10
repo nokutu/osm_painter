@@ -7,9 +7,10 @@ import overpy
 from shapely.geometry import Polygon
 from shapely.geometry.base import BaseGeometry
 
+from osm_painter.model.style import Style
+from osm_painter.utils import transform_coords
+
 from .drawable import Drawable
-from ..style import Style
-from ...utils.coords_utils import transform_coords
 
 
 class Area(Drawable):

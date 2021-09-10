@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from shapely.geometry.base import BaseGeometry
 
-from ..style import Style
+from osm_painter.model.style import Style
 
 
 class Drawable(Protocol):

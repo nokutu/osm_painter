@@ -4,9 +4,7 @@ from descartes import PolygonPatch
 from joblib import Parallel, delayed
 import matplotlib.pyplot as plt
 
-from .model.layer import Layer
-from .model.location import Location
-from .model.style import StyleDict, Style
+from .model import Layer, Location, StyleDict, Style
 
 
 def draw(axes: plt.Axes, location: Location, layers: List[Layer], style: StyleDict, perimeter_style: Style,

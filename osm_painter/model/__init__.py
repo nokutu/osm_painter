@@ -1,2 +1,3 @@
-from .layer import Layers, ElevationLayer
-from .location import RadiusLocation, BoxLocation
+from .layer import ElevationLayer, Layer, Layers
+from .location import BoxLocation, Location, RadiusLocation
+from .style import LayerStyle, Style, StyleDict

@@ -4,8 +4,9 @@ from descartes import PolygonPatch
 import matplotlib.pyplot as plt
 from shapely.geometry.base import BaseGeometry
 
+from osm_painter.model.style import Style
+
 from .drawable import Drawable
-from ..style import Style
 
 
 class Edge(Drawable):
