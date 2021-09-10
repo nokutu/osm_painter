@@ -44,17 +44,23 @@ draw(ax, RadiusLocation((38.54200, -1.95335), 1000),
         },
         'elevation': {
             'default': {'color': plt.get_cmap('viridis'), 'lw': 2, 'zorder': -3}
-        }
-    }, perimeter_style={
-        'lw': 2,
-        'fc': '#011627',
-        'zorder': 10
-    }, background_style={
-        'zorder': -10,
-        'fc': '#F6F7F8',
-        'ec': '#E8EBED',
-        'hatch': 'ooo...'
-    })
+        },
+        'perimeter': {
+            'default': {
+                'lw': 2,
+                'fc': '#011627',
+                'zorder': 10
+            }
+        },
+        'background': {
+            'default': {
+                'zorder': -10,
+                'fc': '#F6F7F8',
+                'ec': '#E8EBED',
+                'hatch': 'ooo...'
+            }
+        }}
+     )
 
 plt.savefig('out.svg')
 plt.show()
