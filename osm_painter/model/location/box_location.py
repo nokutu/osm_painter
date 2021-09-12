@@ -6,10 +6,12 @@ from shapely.geometry import Polygon
 from shapely.geometry.base import BaseGeometry
 
 from osm_painter.model.drawable import Drawable, Edge
-from osm_painter.utils.coords_utils import transform_coords
+from osm_painter.utils.coords_utils import transform_coords, transform_coords_inv
+
+from .location import Location
 
 
-class BoxLocation:
+class BoxLocation(Location):
     _coords: Tuple[float, float]
     _width: float
     _height: float
@@ -45,3 +47,10 @@ class BoxLocation:
         if self._corner_radius:
             return square.buffer(self._corner_radius)
         return square
+
+    def get_bounds(self) -> Tuple[float, float, float, float]:
+        center = transform_coords(self._coords[0], self._coords[1])
+        lats = np.array([center[0] - self._height, center[0] + self._height], dtype=np.float32)
+        lons = np.array([center[1] - self._width, center[1] + self._width], dtype=np.float32)
+        bounds = transform_coords_inv(lats, lons)
+        return bounds[0, 1], bounds[0, 0], bounds[1, 1], bounds[1, 0]
