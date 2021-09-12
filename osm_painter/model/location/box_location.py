@@ -18,6 +18,7 @@ class BoxLocation(Location):
     _radius: float
 
     def __init__(self, coords: Tuple[float, float], width: float, height: float, corner_radius: float = 0):
+        super().__init__()
         self._coords = coords
         self._width = width
         self._height = height

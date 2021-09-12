@@ -7,12 +7,15 @@ from shapely.geometry.base import BaseGeometry
 from osm_painter.model.drawable import Drawable, Edge
 from osm_painter.utils.coords_utils import transform_coords, transform_coords_inv
 
+from .location import Location
 
-class RadiusLocation:
+
+class RadiusLocation(Location):
     _coords: Tuple[float, float]
     _radius: float
 
     def __init__(self, coords: Tuple[float, float], radius: float):
+        super().__init__()
         self._coords = coords
         self._radius = radius
 
