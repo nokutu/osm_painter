@@ -4,7 +4,7 @@ from osm_painter import draw, Layers, RadiusLocation
 
 fig, ax = plt.subplots(figsize=(15, 12), constrained_layout=True)
 
-draw(ax, RadiusLocation((38.54200, -1.95335), 1000),
+draw(ax, RadiusLocation((38.54200, -1.95335), 750),
      [
          Layers.highway_layer,
          Layers.building_layer,
